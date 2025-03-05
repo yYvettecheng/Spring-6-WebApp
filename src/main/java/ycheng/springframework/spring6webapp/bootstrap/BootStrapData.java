@@ -8,18 +8,22 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import ycheng.springframework.spring6webapp.domain.Author;
 import ycheng.springframework.spring6webapp.domain.Book;
+import ycheng.springframework.spring6webapp.domain.Publisher;
 import ycheng.springframework.spring6webapp.repositories.AuthorRepository;
 import ycheng.springframework.spring6webapp.repositories.BookRepository;
+import ycheng.springframework.spring6webapp.repositories.PublisherRepository;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -52,7 +56,17 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
 
+        Publisher harvard = new Publisher();
+        harvard.setPublisherName("Harvard");
+        harvard.setAddress("79 Garden Street");
+        harvard.setCity("Cambridge");
+        harvard.setState("Massachusetts");
+        harvard.setZip("02138");
+
+        publisherRepository.save(harvard);
+
         System.out.println("Author count: " + authorRepository.count());
         System.out.println("Book count: " + bookRepository.count());
+        System.out.println("Publisher count: " + publisherRepository.count());
     }
 }

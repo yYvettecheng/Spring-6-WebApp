@@ -8,5 +8,4 @@ import org.springframework.data.repository.CrudRepository;
 import ycheng.springframework.spring6webapp.domain.Author;
 
 public interface AuthorRepository extends CrudRepository<Author, Long> {
-
 }

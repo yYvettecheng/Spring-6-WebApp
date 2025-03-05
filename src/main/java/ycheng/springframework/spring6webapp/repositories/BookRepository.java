@@ -8,5 +8,4 @@ import org.springframework.data.repository.CrudRepository;
 import ycheng.springframework.spring6webapp.domain.Book;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
-
 }
