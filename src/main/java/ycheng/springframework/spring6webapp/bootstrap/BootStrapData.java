@@ -53,9 +53,6 @@ public class BootStrapData implements CommandLineRunner {
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
 
-        authorRepository.save(ericSaved);
-        authorRepository.save(rodSaved);
-
         Publisher harvard = new Publisher();
         harvard.setPublisherName("Harvard");
         harvard.setAddress("79 Garden Street");
@@ -63,7 +60,14 @@ public class BootStrapData implements CommandLineRunner {
         harvard.setState("Massachusetts");
         harvard.setZip("02138");
 
-        publisherRepository.save(harvard);
+        Publisher harvardSaved = publisherRepository.save(harvard);
+        dddSaved.setPublisher(harvardSaved);
+        noEJBSaved.setPublisher(harvardSaved);
+
+        authorRepository.save(ericSaved);
+        authorRepository.save(rodSaved);
+        bookRepository.save(dddSaved);
+        bookRepository.save(noEJBSaved);
 
         System.out.println("Author count: " + authorRepository.count());
         System.out.println("Book count: " + bookRepository.count());
